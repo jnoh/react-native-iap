@@ -81,6 +81,8 @@
 -(void)rejectPromisesForKey:(NSString*)key code:(NSString*)code message:(NSString*)message error:(NSError*) error {
   NSMutableArray* promises = [promisesByKey valueForKey:key];
 
+  RNIAP_LOG(@"RNIap error: %@ %@", error, [error userInfo]);
+
   if (promises != nil) {
     for (NSMutableArray *tuple in promises) {
       RCTPromiseRejectBlock reject = tuple[1];
@@ -154,7 +156,7 @@ RCT_EXPORT_METHOD(buyProductWithQuantityIOS:(NSString*)sku
                   quantity:(NSInteger*)quantity
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject) {
-  NSLog(@"\n\n\n  buyProductWithQuantityIOS  \n\n.");
+  RNIAP_LOG(@"\n\n\n  buyProductWithQuantityIOS  \n\n.");
   autoReceiptConform = true;
   SKProduct *product;
   for (SKProduct *p in validProducts) {
@@ -176,7 +178,7 @@ RCT_EXPORT_METHOD(buyProductWithQuantityIOS:(NSString*)sku
 RCT_EXPORT_METHOD(buyProductWithoutAutoConfirm:(NSString*)sku
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject) {
-  NSLog(@"\n\n\n  buyProductWithoutAutoConfirm  \n\n.");
+  RNIAP_LOG(@"\n\n\n  buyProductWithoutAutoConfirm  \n\n.");
   autoReceiptConform = false;
   SKProduct *product;
   for (SKProduct *p in validProducts) {
@@ -195,7 +197,7 @@ RCT_EXPORT_METHOD(buyProductWithoutAutoConfirm:(NSString*)sku
 }
 
 RCT_EXPORT_METHOD(finishTransaction) {
-  NSLog(@"\n\n\n  finish Transaction  \n\n.");
+  RNIAP_LOG(@"\n\n\n  finish Transaction  \n\n.");
   if (currentTransaction) {
     [[SKPaymentQueue defaultQueue] finishTransaction:currentTransaction];
   }
@@ -204,20 +206,20 @@ RCT_EXPORT_METHOD(finishTransaction) {
 
 RCT_EXPORT_METHOD(clearTransaction) {
   NSArray *pendingTrans = [[SKPaymentQueue defaultQueue] transactions];
-  NSLog(@"\n\n\n  ***  clear remaining Transactions. Call this before make a new transaction   \n\n.");
+  RNIAP_LOG(@"\n\n\n  ***  clear remaining Transactions. Call this before make a new transaction   \n\n.");
   for (int k = 0; k < pendingTrans.count; k++) {
     [[SKPaymentQueue defaultQueue] finishTransaction:pendingTrans[k]];
   }
 }
 
 RCT_EXPORT_METHOD(clearProducts) {
-  NSLog(@"\n\n\n  ***  clear valid products. \n\n.");
+  RNIAP_LOG(@"\n\n\n  ***  clear valid products. \n\n.");
   [validProducts removeAllObjects];
 }
 
 RCT_EXPORT_METHOD(promotedProduct:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject) {
-  NSLog(@"\n\n\n  ***  get promoted product. \n\n.");
+  RNIAP_LOG(@"\n\n\n  ***  get promoted product. \n\n.");
   SKProduct *promotedProduct = [IAPPromotionObserver sharedObserver].product;
   resolve(promotedProduct ? promotedProduct.productIdentifier : [NSNull null]);
 }
@@ -226,7 +228,7 @@ RCT_EXPORT_METHOD(buyPromotedProduct:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject) {
   SKPayment *promotedPayment = [IAPPromotionObserver sharedObserver].payment;
   if (promotedPayment) {
-    NSLog(@"\n\n\n  ***  buy promoted product. \n\n.");
+    RNIAP_LOG(@"\n\n\n  ***  buy promoted product. \n\n.");
     [[SKPaymentQueue defaultQueue] addPayment:promotedPayment];
     [self addPromiseForKey:RCTKeyForInstance(promotedPayment.productIdentifier) resolve:resolve reject:reject];
   } else {
@@ -253,7 +255,7 @@ RCT_EXPORT_METHOD(buyPromotedProduct:(RCTPromiseResolveBlock)resolve
 // Add to valid products from Apple server response. Allowing getProducts, getSubscriptions call several times.
 // Doesn't allow duplication. Replace new product.
 -(void)addProduct:(SKProduct *)aProd {
-  NSLog(@"\n  Add new object : %@", aProd.productIdentifier);
+  RNIAP_LOG(@"\n  Add new object : %@", aProd.productIdentifier);
   int delTar = -1;
   for (int k = 0; k < validProducts.count; k++) {
     SKProduct *cur = validProducts[k];
@@ -279,21 +281,23 @@ RCT_EXPORT_METHOD(buyPromotedProduct:(RCTPromiseResolveBlock)resolve
   for (SKPaymentTransaction *transaction in transactions) {
     switch (transaction.transactionState) {
       case SKPaymentTransactionStatePurchasing:
-        NSLog(@"\n\n Purchase Started !! \n\n");
+        RNIAP_LOG(@"\n\n Purchase Started !! \n\n");
         break;
       case SKPaymentTransactionStatePurchased:
-        NSLog(@"\n\n\n\n\n Purchase Successful !! \n\n\n\n\n.");
+        RNIAP_LOG(@"\n\n\n\n\n Purchase Successful !! \n\n\n\n\n.");
+        RNIAP_LOG(@"Transaction Identifier: %@", transaction.transactionIdentifier);
         [self purchaseProcess:transaction];
         break;
       case SKPaymentTransactionStateRestored: // 기존 구매한 아이템 복구..
-        NSLog(@"Restored ");
+        RNIAP_LOG(@"Restored ");
+        RNIAP_LOG(@"Transaction Identifier: %@", transaction.transactionIdentifier);
         [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
         break;
       case SKPaymentTransactionStateDeferred:
-        NSLog(@"Deferred (awaiting approval via parental controls, etc.)");
+        RNIAP_LOG(@"Deferred (awaiting approval via parental controls, etc.)");
         break;
       case SKPaymentTransactionStateFailed:
-        NSLog(@"\n\n\n\n\n\n Purchase Failed  !! \n\n\n\n\n");
+        RNIAP_LOG(@"\n\n\n\n\n\n Purchase Failed  !! \n\n\n\n\n");
         [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
         NSString *key = RCTKeyForInstance(transaction.payment.productIdentifier);
         dispatch_sync(myQueue, ^{
@@ -307,7 +311,7 @@ RCT_EXPORT_METHOD(buyPromotedProduct:(RCTPromiseResolveBlock)resolve
 }
 
 -(void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue {  ////////   RESTORE
-  NSLog(@"\n\n\n  paymentQueueRestoreCompletedTransactionsFinished  \n\n.");
+  RNIAP_LOG(@"\n\n\n  paymentQueueRestoreCompletedTransactionsFinished  \n\n.");
   NSMutableArray* items = [NSMutableArray arrayWithCapacity:queue.transactions.count];
 
   for(SKPaymentTransaction *transaction in queue.transactions) {
@@ -326,7 +330,7 @@ RCT_EXPORT_METHOD(buyPromotedProduct:(RCTPromiseResolveBlock)resolve
     [self rejectPromisesForKey:@"availableItems" code:[self standardErrorCode:(int)error.code]
                        message:error.localizedDescription error:error];
   });
-  NSLog(@"\n\n\n restoreCompletedTransactionsFailedWithError \n\n.");
+  RNIAP_LOG(@"\n\n\n restoreCompletedTransactionsFailedWithError \n\n.");
 }
 
 -(void)purchaseProcess:(SKPaymentTransaction *)transaction {

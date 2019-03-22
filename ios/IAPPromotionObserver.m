@@ -4,7 +4,6 @@
   SKPayment *_promotedPayment;
   SKProduct *_promotedProduct;
 }
-
 @end
 
 @implementation IAPPromotionObserver
@@ -50,6 +49,8 @@
 - (BOOL)paymentQueue:(SKPaymentQueue *)queue shouldAddStorePayment:(SKPayment *)payment forProduct:(SKProduct *)product {
   _promotedProduct = product;
   _promotedPayment = payment;
+
+  RNIAP_LOG(@"paymentQueue:shouldAddStorePayment: %@", payment.productIdentifier);
 
   if (self.delegate != nil && [self.delegate respondsToSelector:@selector(shouldAddStorePayment:forProduct:)]) {
     return [self.delegate shouldAddStorePayment:payment forProduct:product];

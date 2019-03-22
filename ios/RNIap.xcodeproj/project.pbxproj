@@ -7,9 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		137F62C022457A90004221A3 /* RNIapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 137F62BF22457A90004221A3 /* RNIapTests.m */; };
+		137F62C222457A90004221A3 /* libRNIap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 134814201AA4EA6300B7C361 /* libRNIap.a */; };
 		28CBF364220349F6005F51AC /* IAPPromotionObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CBF363220349F6005F51AC /* IAPPromotionObserver.m */; };
 		B3E7B58A1CC2AC0600A0062D /* RNIapIos.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNIapIos.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		137F62C322457A90004221A3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 58B511D31A9E6C8500147676 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 58B511DA1A9E6C8500147676;
+			remoteInfo = RNIap;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		58B511D91A9E6C8500147676 /* CopyFiles */ = {
@@ -25,6 +37,9 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNIap.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNIap.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		137F62BD22457A90004221A3 /* RNIapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RNIapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		137F62BF22457A90004221A3 /* RNIapTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNIapTests.m; sourceTree = "<group>"; };
+		137F62C122457A90004221A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28CBF362220349F6005F51AC /* IAPPromotionObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPPromotionObserver.h; sourceTree = "<group>"; };
 		28CBF363220349F6005F51AC /* IAPPromotionObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPPromotionObserver.m; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* RNIapIos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNIapIos.h; sourceTree = "<group>"; };
@@ -32,6 +47,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		137F62BA22457A90004221A3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				137F62C222457A90004221A3 /* libRNIap.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		58B511D81A9E6C8500147676 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -50,6 +73,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		137F62BE22457A90004221A3 /* RNIapTests */ = {
+			isa = PBXGroup;
+			children = (
+				137F62BF22457A90004221A3 /* RNIapTests.m */,
+				137F62C122457A90004221A3 /* Info.plist */,
+			);
+			path = RNIapTests;
+			sourceTree = "<group>";
+		};
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
@@ -57,13 +89,33 @@
 				B3E7B5891CC2AC0600A0062D /* RNIapIos.m */,
 				28CBF362220349F6005F51AC /* IAPPromotionObserver.h */,
 				28CBF363220349F6005F51AC /* IAPPromotionObserver.m */,
+				137F62BE22457A90004221A3 /* RNIapTests */,
 				134814211AA4EA7D00B7C361 /* Products */,
+				137F62BD22457A90004221A3 /* RNIapTests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		137F62BC22457A90004221A3 /* RNIapTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 137F62C522457A90004221A3 /* Build configuration list for PBXNativeTarget "RNIapTests" */;
+			buildPhases = (
+				137F62B922457A90004221A3 /* Sources */,
+				137F62BA22457A90004221A3 /* Frameworks */,
+				137F62BB22457A90004221A3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				137F62C422457A90004221A3 /* PBXTargetDependency */,
+			);
+			name = RNIapTests;
+			productName = RNIapTests;
+			productReference = 137F62BD22457A90004221A3 /* RNIapTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		58B511DA1A9E6C8500147676 /* RNIap */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNIap" */;
@@ -87,9 +139,14 @@
 		58B511D31A9E6C8500147676 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
+					137F62BC22457A90004221A3 = {
+						CreatedOnToolsVersion = 10.1;
+						ProvisioningStyle = Automatic;
+					};
 					58B511DA1A9E6C8500147676 = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
@@ -108,11 +165,30 @@
 			projectRoot = "";
 			targets = (
 				58B511DA1A9E6C8500147676 /* RNIap */,
+				137F62BC22457A90004221A3 /* RNIapTests */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		137F62BB22457A90004221A3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		137F62B922457A90004221A3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				137F62C022457A90004221A3 /* RNIapTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		58B511D71A9E6C8500147676 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -124,7 +200,79 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		137F62C422457A90004221A3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 58B511DA1A9E6C8500147676 /* RNIap */;
+			targetProxy = 137F62C322457A90004221A3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		137F62C622457A90004221A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = RNIapTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.paperlabs.RNIapTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		137F62C722457A90004221A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = RNIapTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.paperlabs.RNIapTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		58B511ED1A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -243,6 +391,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		137F62C522457A90004221A3 /* Build configuration list for PBXNativeTarget "RNIapTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				137F62C622457A90004221A3 /* Debug */,
+				137F62C722457A90004221A3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "RNIap" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
